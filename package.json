@@ -2,17 +2,25 @@
   "name": "js-core-yaml",
   "version": "0.1.0",
   "description": "js core yaml parser and stringifier",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lunochkin/js-core-yaml.git"
   },
-  "author": "lunochkin",
+  "author": "Maksim Lunochkin <maxlun86@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lunochkin/js-core-yaml/issues"
   },
-  "homepage": "https://github.com/lunochkin/js-core-yaml#readme"
+  "homepage": "https://github.com/lunochkin/js-core-yaml#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
 }
