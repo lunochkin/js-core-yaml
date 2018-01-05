@@ -1,0 +1,18 @@
+{
+  "name": "js-core-yaml",
+  "version": "0.1.0",
+  "description": "js core yaml parser and stringifier",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunochkin/js-core-yaml.git"
+  },
+  "author": "lunochkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lunochkin/js-core-yaml/issues"
+  },
+  "homepage": "https://github.com/lunochkin/js-core-yaml#readme"
+}
