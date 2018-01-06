@@ -1,9 +1,6 @@
-import Type from './Type'
+import Type from '../Type'
+import {isNegativeZero} from '../utils'
 
-
-function isNegativeZero(num) {
-  return (num === 0) && (Number.NEGATIVE_INFINITY === 1 / num)
-}
 
 const YAML_FLOAT_PATTERN = new RegExp(
   // 2.5e4, 2.5 and integers

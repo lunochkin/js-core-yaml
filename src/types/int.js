@@ -1,8 +1,6 @@
-import Type from './Type'
+import Type from '../Type'
+import {isNegativeZero} from '../utils'
 
-function isNegativeZero(num) {
-  return (num === 0) && (Number.NEGATIVE_INFINITY === 1 / num)
-}
 
 function isHexCode(c) {
   return ((0x30 /* 0 */ <= c) && (c <= 0x39/* 9 */)) ||

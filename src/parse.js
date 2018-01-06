@@ -1,108 +1,5 @@
-import Type from './Type'
-import intType from './int'
-import floatType from './float'
-import boolType from './bool'
-import nullType from './null'
-
-
-function isObject(subject) {
-  return (typeof subject === 'object') && (subject !== null)
-}
-
-function repeat(str, count) {
-  let result = '', cycle
-
-  for (cycle = 0; cycle < count; cycle += 1) {
-    result += str
-  }
-
-  return result
-}
-
-
-function compileList(schema, name, result) {
-  const exclude = []
-
-  schema.include.forEach(function (includedSchema) {
-    result = compileList(includedSchema, name, result)
-  })
-
-  schema[name].forEach(function (currentType) {
-    result.forEach(function (previousType, previousIndex) {
-      if (previousType.tag === currentType.tag && previousType.kind === currentType.kind) {
-        exclude.push(previousIndex)
-      }
-    })
-
-    result.push(currentType)
-  })
-
-  return result.filter(function (type, index) {
-    return exclude.indexOf(index) === -1
-  })
-}
-
-
-function compileMap(...args) {
-  let result = {
-    scalar: {},
-    sequence: {},
-    mapping: {},
-    fallback: {}
-  }, index, length
-
-  function collectType(type) {
-    result[type.kind][type.tag] = result['fallback'][type.tag] = type
-  }
-
-  length = args.length
-
-  for (index = 0; index < length; index += 1) {
-    args[index].forEach(collectType)
-  }
-  return result
-}
-
-
-function Schema(definition) {
-  this.include = definition.include || []
-  this.implicit = definition.implicit || []
-  this.explicit = definition.explicit || []
-
-  this.implicit.forEach(function (type) {
-    if (type.loadKind && type.loadKind !== 'scalar') {
-      throw new Error('There is a non-scalar type in the implicit list of a schema. Implicit resolving of such types is not supported.')
-    }
-  })
-
-  this.compiledImplicit = compileList(this, 'implicit', [])
-  this.compiledExplicit = compileList(this, 'explicit', [])
-  this.compiledTypeMap = compileMap(this.compiledImplicit, this.compiledExplicit)
-}
-
-
-const jsonSchema = new Schema({
-  explicit: [
-    new Type('tag:yaml.org,2002:str', {
-      kind: 'scalar',
-      construct: data => data !== null ? data : ''
-    }),
-    new Type('tag:yaml.org,2002:seq', {
-      kind: 'sequence',
-      construct: data => data !== null ? data : []
-    }),
-    new Type('tag:yaml.org,2002:map', {
-      kind: 'mapping',
-      construct: data => data !== null ? data : {}
-    })
-  ],
-  implicit: [
-    nullType,
-    boolType,
-    intType,
-    floatType
-  ]
-})
+import schema from './schema'
+import {isObject, repeat} from './utils'
 
 
 let _hasOwnProperty = Object.prototype.hasOwnProperty
@@ -227,14 +124,13 @@ function State(input, options) {
   this.input = input
 
   this.filename = options['filename'] || null
-  this.schema = jsonSchema
   this.onWarning = options['onWarning'] || null
   this.legacy = options['legacy'] || false
   this.json = options['json'] || false
   this.listener = options['listener'] || null
 
-  this.implicitTypes = this.schema.compiledImplicit
-  this.typeMap = this.schema.compiledTypeMap
+  this.implicitTypes = schema.compiledImplicit
+  this.typeMap = schema.compiledTypeMap
 
   this.length = input.length
   this.position = 0
@@ -243,17 +139,6 @@ function State(input, options) {
   this.lineIndent = 0
 
   this.documents = []
-
-  /*
-  this.version
-  this.checkLineBreaks
-  this.tagMap
-  this.anchorMap
-  this.tag
-  this.anchor
-  this.kind
-  this.result*/
-
 }
 
 
