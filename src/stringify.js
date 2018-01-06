@@ -18,7 +18,7 @@ const stringify = data => {
     number: x => x,
     boolean: x => x ? 'true' : 'false',
     string: x => x,
-    array: x => {
+    array: (x, isArrayItem = false, root = false) => {
       let output = ''
 
       if (x.length === 0) {
@@ -26,15 +26,24 @@ const stringify = data => {
         return output
       }
 
-      indentLevel = indentLevel.replace(/$/, '  ')
-      x.forEach(y => {
+      if (!root) {
+        indentLevel = indentLevel.replace(/$/, '  ')
+      }
+      x.forEach((y, index) => {
         const handler = handlers[typeOf(y)]
 
         if (!handler) {
           throw new Error('unknown type: ' + typeOf(y))
         }
 
-        output += '\n' + indentLevel + '- ' + handler(y, true)
+        const disableNewLine = index === 0 && (isArrayItem || root)
+        if (!disableNewLine) {
+          output += '\n'
+        }
+        if (index > 0 || !isArrayItem) {
+          output += indentLevel
+        }
+        output += '- ' + handler(y, true)
       })
       indentLevel = indentLevel.replace(/  /, '')
       return output

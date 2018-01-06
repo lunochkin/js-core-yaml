@@ -5,6 +5,10 @@ const stringify = require('../src/stringify').default
 const check = input => {
   const stringifyResult = stringify(input)
   const dumpResult = dump(input)
+  if (stringifyResult !== dumpResult) {
+    console.log('stringify: ', stringifyResult)
+    console.log('dump: ', dumpResult)
+  }
   return expect(stringifyResult).toBe(dumpResult)
 }
 
@@ -40,6 +44,25 @@ testCheck('complex array', {
     {tpl: 'chat-msg', text: 'two'}
   ]
 })
+
+testCheck('array on root level', [
+  'one',
+  'two'
+])
+
+testCheck('array of arrays', [
+  ['o', 'two'],
+  ['three', 'four']
+])
+
+// testCheck('implicit numbers', {
+//   key: '1'
+// })
+
+testCheck('complex array on root level', [
+  {tpl: 'o', text: 'one'},
+  {tpl: 't', text: 'two'}
+])
 
 testCheck('complex', {
   "_id": "5a02a1e8e60ebe77135cc1c4",
