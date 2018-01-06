@@ -63,9 +63,7 @@ const stringify = data => {
           throw new Error('unknown type: ' + typeOf(val))
         }
 
-        if (index > 0) {
-          output += '\n'
-        }
+        output += '\n'
         if (index > 0 || !isArrayItem) {
           output += indentLevel
         }

@@ -1,10 +1,12 @@
 {
   "name": "js-core-yaml",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "js core yaml parser and stringifier",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -17,10 +19,10 @@
     "url": "https://github.com/lunochkin/js-core-yaml/issues"
   },
   "homepage": "https://github.com/lunochkin/js-core-yaml#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.0.4"
   }
 }
