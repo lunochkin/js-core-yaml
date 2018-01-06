@@ -63,11 +63,19 @@ const stringify = data => {
           throw new Error('unknown type: ' + typeOf(val))
         }
 
-        output += '\n'
+        const disableNewLine = index === 0 && (isArrayItem || root)
+        if (!disableNewLine) {
+          output += '\n'
+        }
         if (index > 0 || !isArrayItem) {
           output += indentLevel
         }
-        output += k + ': ' + handler(val)
+        const res = handler(val)
+        output += k + ':'
+        if (String(res).indexOf('\n') === -1) {
+          output += ' '
+        }
+        output += res
       })
       indentLevel = indentLevel.replace(/  /, '')
 

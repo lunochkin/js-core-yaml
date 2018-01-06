@@ -1,6 +1,6 @@
 {
   "name": "js-core-yaml",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "js core yaml parser and stringifier",
   "main": "dist/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "jest": "^22.0.4"
+    "jest": "^22.0.4",
+    "js-yaml": "^3.10.0"
   }
 }
