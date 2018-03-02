@@ -1,0 +1,242 @@
+{
+  "_id": "5a44d9daf3d085301b6aeb4e",
+  "cname": "travelbot",
+  "nodes": {
+    "start": [
+      {
+        "tpl": "chat-msg",
+        "text": "Hey there! I'm Mike. How can I help you today?"
+      },
+      {
+        "tpl": "chat-msg",
+        "text": "I can give you a recommendation for your next vacation or show you some of our holiday destinations!"
+      }
+    ],
+    "prompt": [
+      {
+        "tpl": "chat-msg",
+        "regex": "holiday|vacation|recommendation|where",
+        "text": "Sure!",
+        "route": "season"
+      }
+    ],
+    "season": [
+      {
+        "tpl": "chat-msg",
+        "text": "Pick a season"
+      },
+      {
+        "tpl": "chat-scroller",
+        "imageClass": "image-button",
+        "hideLabels": true,
+        "slides": [
+          {
+            "src": "/travel/spring.jpg",
+            "route": "holidayType"
+          },
+          {
+            "src": "/travel/summer.jpg",
+            "route": "holidayType"
+          },
+          {
+            "src": "/travel/fall.jpg",
+            "route": "holidayType"
+          },
+          {
+            "src": "/travel/winter.jpg",
+            "route": "holidayType"
+          }
+        ]
+      }
+    ],
+    "holidayType": [
+      {
+        "tpl": "chat-msg",
+        "text": "What type of holiday are you looking for?"
+      },
+      {
+        "tpl": "chat-menu",
+        "options": [
+          {
+            "text": "Scenic",
+            "route": "travelPartner"
+          },
+          {
+            "text": "Historical",
+            "route": "travelPartner"
+          },
+          {
+            "text": "Shopping",
+            "route": "travelPartner"
+          },
+          {
+            "text": "Adventure",
+            "route": "travelPartner"
+          }
+        ]
+      }
+    ],
+    "travelPartner": [
+      {
+        "tpl": "chat-msg",
+        "text": "Are you traveling with anyone?"
+      },
+      {
+        "tpl": "chat-menu",
+        "options": [
+          {
+            "text": "Solo",
+            "route": "reco"
+          },
+          {
+            "text": "Partner",
+            "route": "reco"
+          },
+          {
+            "text": "Friends",
+            "route": "reco"
+          },
+          {
+            "text": "Family",
+            "route": "reco"
+          }
+        ]
+      }
+    ],
+    "reco": [
+      {
+        "tpl": "chat-msg",
+        "text": "Here's what I recommend!"
+      },
+      {
+        "tpl": "chat-image",
+        "src": "/travel/okinawa-video.mp4",
+        "route": "okinawa"
+      }
+    ],
+    "okinawa": [
+      {
+        "tpl": "chat-msg",
+        "text": "Okinawa is a beautiful sub-tropical island south of the main island of Japan. These are some things you can do in Okinawa"
+      },
+      {
+        "tpl": "chat-scroller",
+        "slides": [
+          {
+            "src": "/travel/okinawa-beach.jpg",
+            "text": "Relax at the beach"
+          },
+          {
+            "src": "/travel/okinawa-castle.jpg",
+            "text": "Visit castle ruins"
+          },
+          {
+            "src": "/travel/okinawa-diving.jpg",
+            "text": "Diving"
+          },
+          {
+            "src": "/travel/okinawa-paragliding.jpg",
+            "text": "Paragliding"
+          },
+          {
+            "src": "/travel/okinawa-shopping.jpg",
+            "text": "Shopping"
+          }
+        ]
+      },
+      {
+        "tpl": "chat-msg",
+        "text": "Wanna check out our resorts in Okinawa?"
+      }
+    ],
+    "hotelgo": [
+      {
+        "tpl": "chat-msg",
+        "regex": "yes|ok|hotel|resort",
+        "text": "Let's go!",
+        "story": {
+          "cname": "hotel",
+          "node": "start"
+        }
+      }
+    ],
+    "other": [
+      {
+        "tpl": "chat-msg",
+        "text": "Here are some other places you can check out"
+      },
+      {
+        "tpl": "chat-scroller",
+        "slides": [
+          {
+            "src": "/travel/destinations.jpg",
+            "text": "Somewhere special is waiting for you"
+          },
+          {
+            "src": "/travel/asia.jpg",
+            "text": "Asia as you've never seen before",
+            "route": "go-asia"
+          },
+          {
+            "src": "/travel/china.jpg",
+            "text": "Exclusive destinations in China",
+            "route": "go-china"
+          },
+          {
+            "src": "/travel/japan.jpg",
+            "text": "Japan is great at this time of year",
+            "route": "go-japan"
+          },
+          {
+            "src": "/travel/indianocean.jpg",
+            "route": "go-indianocean",
+            "text": "beyond the surf in the Indian Ocean"
+          },
+          {
+            "src": "/travel/ski-asia.jpg",
+            "route": "go-ski-asia",
+            "text": "ski til you drop in Asia"
+          }
+        ]
+      }
+    ],
+    "go-asia": [
+      {
+        "tpl": "chat-msg",
+        "text": "Let's go to asia!"
+      }
+    ],
+    "go-china": [
+      {
+        "tpl": "chat-msg",
+        "text": "Going to China!",
+        "story": {
+          "cname": "go-china",
+          "node": "start"
+        }
+      }
+    ],
+    "go-japan": [
+      {
+        "tpl": "chat-msg",
+        "text": "Let's go to Japan"
+      }
+    ],
+    "go-indianocean": [
+      {
+        "tpl": "chat-msg",
+        "text": "Let's go to The Indian Ocean!"
+      }
+    ],
+    "go-ski-asia": [
+      {
+        "tpl": "chat-msg",
+        "text": "Let's Ski!"
+      }
+    ]
+  },
+  "tags": [
+    "demobot",
+    "travelbot"
+  ]
+}

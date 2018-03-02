@@ -17,7 +17,12 @@ const stringify = data => {
     null: () => 'null',
     number: x => x,
     boolean: x => x ? 'true' : 'false',
-    string: x => x,
+    string: x => {
+      if (x.indexOf('\n') !== -1) {
+        return ' |\n' + x.trim().split('\n').map(one => '  ' + indentLevel + one).join('\n')
+      }
+      return x
+    },
     array: (x, isArrayItem = false, root = false) => {
       let output = ''
 

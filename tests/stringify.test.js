@@ -4,7 +4,7 @@ const stringify = require('../src/stringify').default
 
 const check = input => {
   const stringifyResult = stringify(input)
-  const dumpResult = dump(input)
+  const dumpResult = dump(input, {lineWidth: -1})
   if (stringifyResult !== dumpResult) {
     console.log('stringify: ', stringifyResult)
     console.log('dump: ', dumpResult)
@@ -85,4 +85,24 @@ testCheck('complex', {
     "find-the-verb"
   ],
   "cname": "cname-03902831389834458"
+})
+
+
+const story = require('./story.json')
+
+testCheck('story', story)
+
+
+const multilineString = 'text: \ntpl: zat-msg\n'
+
+testCheck('multiline', {
+  yaml: multilineString
+})
+
+testCheck('multiline nested', {
+  nodes: [
+    {
+      yaml: multilineString
+    }
+  ]
 })

@@ -22,6 +22,10 @@ testCheck('array of objects', [
   {two: 'two', third: 'asda'}
 ])
 
+testCheck('long text', {
+  long: 'Okinawa is a beautiful sub-tropical island south of the main island of Japan. These are some things you can do in Okinawa:'
+})
+
 testCheck('nested', {
   key: {
     second: {
